@@ -1,5 +1,6 @@
 const api = 'https://gdbrowser.com/api/search/'
-const listapi = 'https://pointercrate.com/api/v2/demons/?limit=100'
+const listapi = 'https://pointercrate.xyze.dev/api/v2/demons/?limit=100'
+const 19gdpslistapi = 'https://pointercrate.com/api/v2/demons/?limit=100'
 const challengeapi = 'https://gdchallengelist.com/api/v2/demons/?limit=100'
 const status = 'https://gdbrowser.com/api/search/*'
 
@@ -220,7 +221,27 @@ async function startroulette() {
                 document.getElementById('settings').classList.remove('is-loading')
             }, 250)
         })
+       } else if (query=='*1.9GDPSlist') {
+        document.getElementById('start').classList.add('is-loading')
 
+        console.log("1.9 GDPS list")
+
+        setTimeout(async () => {
+            req = await axios.get(19gdpslistapi)
+            apilist = req.data
+            
+
+            apilist.shuffle()
+    
+            apilist = apilist.slice(0,100)
+            getNextAPI();
+
+            document.getElementById('settings').classList.add('animate__fadeOut')
+            setTimeout(() => {
+                document.getElementById('settings').classList.add('is-hidden')
+                document.getElementById('settings').classList.remove('is-loading')
+            }, 250)
+        })
     } else {
         document.getElementById('start').classList.add('is-loading')
 
