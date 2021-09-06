@@ -1,6 +1,6 @@
 const api = 'https://gdbrowser.com/api/search/'
-const listapi = 'https://pointercrate.com/api/v1/demons/?limit=100'
-const challengeapi = 'https://gdchallengelist.com/api/v1/demons/?limit=100'
+const listapi = 'https://pointercrate.com/api/v2/demons/?limit=100'
+const challengeapi = 'https://gdchallengelist.com/api/v2/demons/?limit=100'
 const status = 'https://gdbrowser.com/api/search/*'
 
 const TIMEOUT = 2500;
