@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDRoulette</title>
+    <style>
+
+        @media (min-width: 768px) {
+            .yt-thumb {
+                width: 196px !important;
+                height: 110px !important;
+            }
+        }
+        
+    </style>
+    <link rel="shortcut icon" href="roulette.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+</head>
+<body>
+    <input type="text" id="copypaste" style="position: absolute; opacity: 0;">
+
+
+    <div id="help" class="modal animate__animated animate__fadeIn" style="--animate-duration: 0.25s">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="box">
+                <div class="media">
+                    <div class="media-content">Geometry Dash Roulette is a minigame in which you choose a level difficulty and then get the rated levels from that difficulty in a random order. Each time you play a level you must get a higher percent than the previous level, starting at 1% on the first level. The game ends when you either get 100% on a level or you give up. The game was originally made for only extreme demons, the website most commonly used from which I found great inspiration from can be found <a href="https://matcool.github.io/extreme-demon-roulette/">here</a>. The concept is based off of <a href="https://www.youtube.com/watch?v=nv_9FkfGRsc">this video</a> by npesta. Hope you enjoy!
+                    <br>
+                    <br>Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                    </div>
+                    <div class="media-right has-text-right"><div id="btn-close-help" class="button is-danger" onclick="document.getElementById('help').classList.remove('is-active')">X</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="down" class="modal" style="--animate-duration: 0.25s">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="box">
+                <div class="media">
+                    <div id='down-content' class="media-content">
+                        Hey! Either one of two things have happened. Either you've used the GD servers too much in the last minute, leading you to get ratelimited, or <a href='https://www.gdbrowser.com'>GDBrowser</a> has been IP banned again. Please wait a minute then refresh.
+                    </div>
+                    <div class="media-right has-text-right"><div id="btn-close-help" class="button is-danger" onclick="document.getElementById('down').classList.remove('is-active')">X</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="columns is-centered is-vcentered mt-1">
+        <div class="column is-narrow has-text-left is-hidden-mobile">
+            <div id="btn-help" class="button is-info" onclick="document.getElementById('help').classList.add('is-active')">Help</div>
+        </div>
+        <div class="column is-half has-text-centered"><h1 class="title">Geometry Dash Roulette</h1><p class="subtitle" id="splash" style="height: 25px"></p></div>
+        <div class="column is-narrow has-text-right is-hidden-mobile">Coded by <a href='https://www.figmentcoding.me/'>FigmentBoy</a></div>
+
+        <div class="columns is-hidden-tablet is-mobile is-centered is-vcentered">
+            <div class="column is-narrow has-text-left">
+                <div id="btn-help" class="button is-info" onclick="document.getElementById('help').classList.add('is-active')">Help</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container animate__animated" id="settings" style="--animate-duration: 0.25s">
+        <div class="box columns">
+            <div class="column">
+                <h2 class="title mb-1">Gamemode</h2>
+                <div class="mb-3">
+                    <label class="radio"><input type="radio" name="difficulty" value="?diff=1&starred" id="easy"> Easy</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="?diff=2&starred" id="normal"> Normal</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="?diff=3&starred" id="hard"> Hard</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="?diff=4&starred" id="harder"> Harder</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="?diff=5&starred" id="insane"> Insane</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="?diff=-2&demonFilter=1" id="easydemon"> Easy Demon</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="?diff=-2&demonFilter=2" id="mediumdemon"> Medium Demon</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="?diff=-2&demonFilter=3" id="harddemon"> Hard Demon</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="?diff=-2&demonFilter=4" id="insanedemon"> Insane Demon</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="?diff=-2&demonFilter=5" id="extremedemon"> Any Extreme Demon</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="demonlist" id="demonlist"> Extreme Demon List</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="?diff=-2" id="demon"> Any Demon</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="challenge" id="challenge"> List Challenge</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="gdpslist" id="gdpslist"> 1.9 GDPS List</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="custom" id="custom"> Custom List</label>
+                    <label class="radio"><input type="radio" name="difficulty" value="creator" id="creator"> Creator</label>
+                </div>
+
+                <h3 class="title mb-1">Options</h3>
+                <div class="mb-3">
+                    <label for="seed">Seed<input class="input" type="number" name="seed" id="seed" ></label>
+                    <span onclick="copylink()" ><label for="link" id=""><span style='cursor:pointer;' id="copytext">Copyable Link (Click to copy)</span><input style='cursor:pointer;' class="input" name="link" id="link" value="" onclick='copylink()' disabled></label></span>
+                    <label for="linkStart"><input name="linkStart" type="checkbox" class="checkbox" id="linkStart"> Make link start roulette immediately?</label>
+                    <br><label for="addSeed"><input name="addSeed" type="checkbox" class="checkbox" id="addSeed"> Add seed to link? (This makes the seed automatically fill in the box)</label>
+                </div>
+                <br>
+                <div id="start" class="button is-success" disabled>Start</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="levels" class="container is-centered">
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
